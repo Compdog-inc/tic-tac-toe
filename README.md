@@ -26,7 +26,7 @@ All commands are in the `command arg0 arg1 arg2...` format
 - `cls` - Clears the screen
 - `clear [cell?]` - Clears the board. Optionally clears a cell.
 - `print [player?]` - Prints the current global (or player if specified) board.
-- `player [player]` - Sets the current player to `player`.
+- `player [player?]` - Sets or gets the current player.
 - `move [cell]` - Sets `cell` to current player
 - `bot`
   - `list` - Lists all currently loaded bots.
