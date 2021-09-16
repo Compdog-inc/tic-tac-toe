@@ -100,6 +100,13 @@ move b1
 bot run mybot \move \1
 ```
 
+Playing with a bot with events:
+```
+move a1
+move a3
+move b1
+```
+
 ## Base library
 - `Compdog.TicTacToe.Cell` - Enum for cell values
 - `Compdog.TicTacToe.SubscribedEventArgs`
