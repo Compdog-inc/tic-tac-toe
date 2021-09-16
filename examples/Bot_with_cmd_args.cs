@@ -21,7 +21,7 @@ namespace Compdog.TicTacToe.Bots.ExampleBot
             return true;    // Return false to show warning
         }
         
-        public bool Event(Loader loader, SubscribeEventArgs e)
+        public bool Event(Loader loader, SubscribedEventArgs e)
         {
             return false;   // Return true to terminate
         }
