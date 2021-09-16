@@ -1,5 +1,5 @@
 # Tic Tac Toe
-Examples and docs for bot api
+Examples and docs for tictatoe
 
 ## Getting started (in Visual Studio 2019)
 
@@ -18,6 +18,12 @@ This is an example.
 randombot ended with result True.
 ```
 5. Now you can create your own bot!
+
+## Tic Tac Toe client arguments
+- `(/-)d` - Allows duplicate bots
+- `(/-)h` - Disables hot reloading of bots
+- `(/-)c` - If set, clears the console on hot reload
+- `(/-)s [int]` - Sets the seed of `Compdog.TicTacToe.Game.Random`
 
 ## Tic Tac Toe client commands
 All commands are in the `command arg0 arg1 arg2...` format
@@ -71,5 +77,27 @@ move b1
 bot run mybot \move \1
 ```
 
-### Base library
-TODO: write stuff
+## Base library
+- `Compdog.TicTacToe.Cell` - Enum for cell values
+- `Compdog.TicTacToe.BoardUpdateEventArgs`
+  - `Board` - Changed board index
+  - `Cell` - Changed cell index. `-1` if multiple changed (like when calling `Clear(board)`)
+  - `OldValue` - Changed cell value before change
+  - `NewValue` - Changed cell value after change
+- `Compdog.TicTacToe.Game` - Main game logic
+  - `static CELL_COUNT` - Number of cells in the game
+  - `Random` - Random seeded with `-s` argument or random
+  - `RandomSeed` - `Random` seed
+  - `BoardCount` - Number of boards (players) in the game
+  - `event BoardUpdate` - Called when a board changes
+  - `UInt32 GetBoardRaw(int board)` - Returns raw board value
+  - `void Clear(int board)` - Clears the whole board
+  - `void Clear(int board, Cell(int) cell)` - Clears the cell
+  - `bool Taken(int board, Cell(int) cell)` - Returns true if the cell is not empty
+  - `void Move(int board, Cell(int) cell)` - Sets `cell` to `board`. If already taken throws an `InvalidOperationException`
+  - `bool TryMove(int board, Cell(int) cell, out string errorMessage)` - Sets `cell` to `board`. If error, returns `false` and sets `errorMessage` to the error
+  - `int GetWin(int board)` - Returns win move or `-1` if none
+- `Compdog.TicTacToe.Bots.IBot` - Interface for all bots
+  - `Description` - Long description of the bot. Shown on `bot info`. If null or empty `ShortDescription` is shown
+  - `ShortDescription` - Short description of the bot. Shown on `bot list`
+  - `bool Run(Game game, string[] args)` - Main code of the bot. `args` contains all args that start with `\` passed in with `bot run`
