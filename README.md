@@ -137,7 +137,7 @@ bot run mybot \move \1
 
 
 [engine.dll]: https://github.com/Compdog-inc/tic-tac-toe/releases/latest
-[Bot.cs]: https://github.com/Compdog-inc/tic-tac-toe/blob/main/Bot.cs
+[Bot.cs]: https://github.com/Compdog-inc/tic-tac-toe/blob/main/examples/Bot.cs
 
 [Choose C# Library project template]: https://user-images.githubusercontent.com/66779418/133610967-cb1d3ef1-1a9c-454e-adaa-36c048ce5bd7.png
 [Make sure you use .NET Framework 4.7.2]: https://user-images.githubusercontent.com/66779418/133611204-95efa064-58c3-4416-bdc9-67ba96177455.png
