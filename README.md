@@ -52,16 +52,17 @@ All commands are in the `command arg0 arg1 arg2...` format
 - `exit` - Exits client
 - `args` - Displays the process arguments
 - `cls` - Clears the screen
-- `clear [cell?]` - Clears the board. Optionally clears a cell.
-- `print [player?]` - Prints the current global (or player if specified) board.
+- `clear [cell?]` - Clears the board. Optionally clears a cell
+- `print [player?]` - Prints the current global (or player if specified) board
 - `player [player?]` - Sets or gets the current player.
 - `move [cell]` - Sets `cell` to current player
 - `bot`
-  - `list` - Lists all currently loaded bots.
-  - `info [query]` - Finds all bots using `query` and shows detailed info.
+  - `list` - Lists all currently loaded bots
+  - `info [query]` - Finds all bots using `query` and shows detailed info
+  - `event [event]` - Calls global event `event`
   - `run [query] \[args]` - Finds all bots using `query` and runs with args `\arg`
-  - `load` - Reloads bots.
-  - `unload` - Unloads currently loaded bots.
+  - `load` - Reloads bots
+  - `unload` - Unloads currently loaded bots
  
  ### Argument formats
  `player` - A number representing the player index.  
@@ -101,6 +102,9 @@ bot run mybot \move \1
 
 ## Base library
 - `Compdog.TicTacToe.Cell` - Enum for cell values
+- `Compdog.TicTacToe.SubscribedEventArgs`
+  - `Event` - Event name
+  - `Game` - Current `Game` instance
 - `Compdog.TicTacToe.BoardUpdateEventArgs`
   - `Board` - Changed board index
   - `Cell` - Changed cell index. `-1` if multiple changed (like when calling `Clear(board)`)
@@ -119,10 +123,17 @@ bot run mybot \move \1
   - `void Move(int board, Cell(int) cell)` - Sets `cell` to `board`. If already taken throws an `InvalidOperationException`
   - `bool TryMove(int board, Cell(int) cell, out string errorMessage)` - Sets `cell` to `board`. If error, returns `false` and sets `errorMessage` to the error
   - `int GetWin(int board)` - Returns win move or `-1` if none
+- `Compdog.TicTacToe.Loader` - Bot controller
+  - `bool Subscribe(IBot sender, string evt)` - Subscribes `sender` to event `evt`. Returns `false` if already subscribed
+  - `bool UnSubscribe(IBot sender, string evt)` - Unsubscribes `sender` from event `evt`. Returns `false` if not subscribed
+  - `bool Call(string evt, Game game)` - Calls event `evt`. Returns `false` if event doesn't exist or if bot terminated it
 - `Compdog.TicTacToe.Bots.IBot` - Interface for all bots
   - `Description` - Long description of the bot. Shown on `bot info`. If null or empty `ShortDescription` is shown
   - `ShortDescription` - Short description of the bot. Shown on `bot list`
-  - `bool Run(Game game, string[] args)` - Main code of the bot. `args` contains all args that start with `\` passed in with `bot run`
+  - `bool Load(Loader loader, Arguments args)` - Called on bot load. Return `false` if it shouldn't load it
+  - `bool Unload(Loader loader)` - Called on bot unload
+  - `bool Event(Loader loader, SubscribedEventArgs e)` - Called on global event
+  - `bool Run(Game game, Loader loader, string[] args)` - Main code of the bot. `args` contains all args that start with `\` passed in with `bot run`
 
 
 [engine.dll]: https://github.com/Compdog-inc/tic-tac-toe/releases/latest
