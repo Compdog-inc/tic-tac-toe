@@ -19,5 +19,5 @@
 - Main game logic
 - Bot interface
 
-[unreleased]: https://github.com/Compdog-inc/tic-tac-toe/compare/v1.0.0.1...master
+[unreleased]: https://github.com/Compdog-inc/tic-tac-toe/compare/v1.0.0.1...main
 [1.0.0.1]: https://github.com/Compdog-inc/tic-tac-toe/releases/tag/v1.0.0.1
