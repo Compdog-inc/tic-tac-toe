@@ -5,10 +5,10 @@ Examples and docs for tictatoe
 
 ### Initial setup
 1. Open Visual Studio and create a new project with `Class Library (.NET Framework)` template. (make sure it uses .NET Framework 4.7.2).
-2. Download latest release of engine.dll and add it to project references.
+2. Download latest release of [engine.dll] and add it to project references.
 
 ### Running example
-1. Delete `Class1.cs` and replace it with [Bot.cs](https://github.com/Compdog-inc/tic-tac-toe/blob/main/Bot.cs).
+1. Delete `Class1.cs` and replace it with [Bot.cs].
 2. Build the project and copy the compiled .dll file to `/bots/` directory in tictactoe.
 3. Run `bot list` command. You should see `Compdog.TicTacToe.Bots.ExampleBot.Bot v1.0.0.0` in the list.
 4. Run `bot run examplebot`. You should see:
@@ -102,3 +102,6 @@ bot run mybot \move \1
   - `Description` - Long description of the bot. Shown on `bot info`. If null or empty `ShortDescription` is shown
   - `ShortDescription` - Short description of the bot. Shown on `bot list`
   - `bool Run(Game game, string[] args)` - Main code of the bot. `args` contains all args that start with `\` passed in with `bot run`
+
+[engine.dll]: https://github.com/Compdog-inc/tic-tac-toe/releases/latest
+[Bot.cs]: https://github.com/Compdog-inc/tic-tac-toe/blob/main/Bot.cs
