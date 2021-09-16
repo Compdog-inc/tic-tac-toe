@@ -4,20 +4,41 @@ Examples and docs for tictatoe
 ## Getting started (in Visual Studio 2019)
 
 ### Initial setup
-1. Open Visual Studio and create a new project with `Class Library (.NET Framework)` template. (make sure it uses .NET Framework 4.7.2).
-2. Download latest release of [engine.dll] and add it to project references.
+1. Open Visual Studio and create a new project with `Class Library (.NET Framework)` template.
+![Choose C# Library project template]  
+make sure it uses `.NET Framework 4.7.2`
+![Make sure you use .NET Framework 4.7.2]
+
+2. Download the latest release of [engine.dll].
+3. Right click on `References` and press `Add Reference...`  
+![Right click on References and press Add Reference...]  
+4. In the window that opens, press the `Browse` tab  
+![Press the browse tab]  
+5. Press `Browse` button  
+![Press the browse button]  
+6. Locate the downloaded `engine.dll` and press `Add`
+7. You should see `engine.dll` in the list  
+![engine.dll in the list]  
+8. Click on `engine` in `References`  
+![engine selected in references list]  
+9. Set `Copy Local` to `False` in the properties  
+![Copy Local set to False in properties]
+
 
 ### Running example
-1. Delete `Class1.cs` and replace it with [Bot.cs].
-2. Build the project and copy the compiled .dll file to `/bots/` directory in tictactoe.
-3. Run `bot list` command. You should see `Compdog.TicTacToe.Bots.ExampleBot.Bot v1.0.0.0` in the list.
-4. Run `bot run examplebot`. You should see:
+1. Follow the steps in [Initial setup](#initial-setup)
+2. Delete `Class1.cs` and replace it with [Bot.cs].  
+![Bot.cs in project files]  
+4. Build the project (`Ctrl+B`) and copy the compiled .dll file to `/bots/` directory in tictactoe.
+5. Run `bot list` command. You should see `Compdog.TicTacToe.Bots.ExampleBot.Bot v1.0.0.0` in the list.
+6. Run `bot run examplebot`. You should see:
 ```
 Starting assemblyname...
 This is an example.
 assemblyname ended with result True.
 ```
-5. Now you can create your own bot!
+(with `assemblyname` replaced with your project name)  
+5. Now you can create your own bot! Don't forget to look at [base library](#base-library)
 
 ## Tic Tac Toe client arguments
 - `(/-)d` - Allows duplicate bots
@@ -103,5 +124,16 @@ bot run mybot \move \1
   - `ShortDescription` - Short description of the bot. Shown on `bot list`
   - `bool Run(Game game, string[] args)` - Main code of the bot. `args` contains all args that start with `\` passed in with `bot run`
 
+
 [engine.dll]: https://github.com/Compdog-inc/tic-tac-toe/releases/latest
 [Bot.cs]: https://github.com/Compdog-inc/tic-tac-toe/blob/main/Bot.cs
+
+[Choose C# Library project template]: https://user-images.githubusercontent.com/66779418/133610967-cb1d3ef1-1a9c-454e-adaa-36c048ce5bd7.png
+[Make sure you use .NET Framework 4.7.2]: https://user-images.githubusercontent.com/66779418/133611204-95efa064-58c3-4416-bdc9-67ba96177455.png
+[Right click on References and press Add Reference...]: https://user-images.githubusercontent.com/66779418/133611693-49886db7-dc62-402d-a166-8257288e55c6.png
+[Press the browse tab]: https://user-images.githubusercontent.com/66779418/133612454-1ce752a6-4c25-4068-bce1-888c93d1c94a.png
+[Press the browse button]: https://user-images.githubusercontent.com/66779418/133612364-8694d81b-3600-454f-a840-5bb8524546d0.png
+[engine.dll in the list]: https://user-images.githubusercontent.com/66779418/133612588-f82c34cc-5cd4-4930-aead-b7d6e6c2e8ee.png
+[engine selected in references list]: https://user-images.githubusercontent.com/66779418/133612620-5a2004d2-a59d-4427-ae86-36cc41ca982a.png
+[Copy Local set to False in properties]: https://user-images.githubusercontent.com/66779418/133612646-75afe3ba-4b4f-4412-bfb0-dd04dde1e3ac.png
+[Bot.cs in project files]: https://user-images.githubusercontent.com/66779418/133613953-60929397-739c-4091-b65e-eeeddf610a65.png
