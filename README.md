@@ -29,6 +29,7 @@ assemblyname ended with result True.
 All commands are in the `command arg0 arg1 arg2...` format
 
 - `exit` - Exits client
+- `args` - Displays the process arguments
 - `cls` - Clears the screen
 - `clear [cell?]` - Clears the board. Optionally clears a cell.
 - `print [player?]` - Prints the current global (or player if specified) board.
