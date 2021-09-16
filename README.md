@@ -8,7 +8,7 @@ Examples and docs for tictatoe
 2. Download latest release of engine.dll and add it to project references.
 
 ### Running example
-1. Delete `Class1.cs` and replace it with Bot.cs.
+1. Delete `Class1.cs` and replace it with [Bot.cs](https://github.com/Compdog-inc/tic-tac-toe/blob/main/Bot.cs).
 2. Build the project and copy the compiled .dll file to `/bots/` directory in tictactoe.
 3. Run `bot list` command. You should see `[examplebot]: Compdog.TicTacToe.Bots.ExampleBot.Bot v1.0.0.0` in the list.
 4. Run `bot run examplebot`. You should see:
