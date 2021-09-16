@@ -26,7 +26,7 @@ namespace Compdog.TicTacToe.Bots.ExampleBot
             return false;   // Return true to terminate
         }
         
-        public bool Run(Game game, string[] args)
+        public bool Run(Game game, Loader loader, string[] args)
         {
             Console.WriteLine(args.ToString());     // Print all cmd args
             Console.WriteLine("This is an example.");
