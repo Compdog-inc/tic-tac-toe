@@ -134,6 +134,13 @@ bot run mybot \move \1
   - `bool Unload(Loader loader)` - Called on bot unload
   - `bool Event(Loader loader, SubscribedEventArgs e)` - Called on global event
   - `bool Run(Game game, Loader loader, string[] args)` - Main code of the bot. `args` contains all args that start with `\` passed in with `bot run`
+- `Compdog.TicTacToe.Utils.Arguments` - Command line arguments
+  - `string GetFlag(string name)` - Returns the flag or `string.Empty` if none
+  - `bool HasFlag(string name)` - Returns `true` if flag exists
+  - `bool HasWord(string word, bool ignoreCase = true)` - Returns `true` if word exists
+  - `string[] GetWords()` - Returns all words
+- `Compdog.TicTacToe.Utils.CommandLine` - Command line parser
+  - `static Arguments ParseArguments(string[] args, params char[] flagIndicators)` - Parses command line arguments
 
 
 [engine.dll]: https://github.com/Compdog-inc/tic-tac-toe/releases/latest
