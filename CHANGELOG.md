@@ -1,6 +1,6 @@
 # Changelog
 
-## [Unreleased]
+## [1.1.0.0] - 2021-09-16
 
 ### Added
 
@@ -19,5 +19,6 @@
 - Main game logic
 - Bot interface
 
-[unreleased]: https://github.com/Compdog-inc/tic-tac-toe/compare/v1.0.0.1...main
+[unreleased]: https://github.com/Compdog-inc/tic-tac-toe/compare/v1.1.0.0...main
+[1.1.0.0]: https://github.com/Compdog-inc/tic-tac-toe/releases/tag/v1.1.0.0
 [1.0.0.1]: https://github.com/Compdog-inc/tic-tac-toe/releases/tag/v1.0.0.1
