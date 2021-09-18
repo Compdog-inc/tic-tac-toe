@@ -5,6 +5,7 @@
 ### Added
  - Plugin Controlled User Environment (PCUE)
  - PluginManager
+ - `v` verbose flag
  
 ### Changed
 
