@@ -82,6 +82,14 @@ namespace Compdog.TicTacToe
             return boards[board];
         }
 
+        public void SetBoardRaw(int board, UInt32 raw)
+        {
+            if (board < MIN_BOARD_COUNT) throw new ArgumentOutOfRangeException("board", board, "Argument was below MIN_BOARD_COUNT.");
+            if (board >= BoardCount) throw new ArgumentOutOfRangeException("board", board, "Argument was above BoardCount.");
+
+            boards[board] = raw;
+        }
+
         public void Clear(int board)
         {
             if (board < MIN_BOARD_COUNT) throw new ArgumentOutOfRangeException("board", board, "Argument was below MIN_BOARD_COUNT.");
