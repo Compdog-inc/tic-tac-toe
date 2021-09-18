@@ -1,5 +1,16 @@
 # Changelog
 
+## [Unreleased]
+
+### Added
+ - Plugin Controlled User Environment (PCUE)
+ - PluginManager
+ 
+### Changed
+
+- `TicTacToe.Bots.IBot` is now `TicTacToe.Plugins.IPlugin`
+- Removed repeating function arguments from `IPlugin` and replaced with `PCUE` in `Load`
+
 ## [1.1.0.0] - 2021-09-16
 
 ### Added
