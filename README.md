@@ -26,23 +26,22 @@ make sure it uses `.NET Framework 4.7.2`
 
 
 ### Running example
+This example shows how you can use the Plugin API to make bots.  
+
 1. Follow the steps in [Initial setup](#initial-setup)
 2. Delete `Class1.cs` and replace it with [Bot.cs].  
 ![Bot.cs in project files]  
-4. Build the project (`Ctrl+B`) and copy the compiled .dll file to `/bots/` directory in tictactoe.
-5. Run `bot list` command. You should see `Compdog.TicTacToe.Bots.ExampleBot.Bot v1.0.0.0` in the list.
-6. Run `bot run examplebot`. You should see:
+4. Build the project (`Ctrl+B`) and copy the compiled .dll file to `/plugins/` directory in tictactoe.
+5. Run `plugin list` command. You should see `Compdog.TicTacToe.Bots.ExampleBot.Bot v1.0.0.0` in the list.
+6. Run `plugin run examplebot`. You should see:
 ```
-Starting assemblyname...
 This is an example.
-assemblyname ended with result True.
 ```
-(with `assemblyname` replaced with your project name)  
-5. Now you can create your own bot! Don't forget to look at [base library](#base-library)
+5. Now you can create your own plugin! Don't forget to look at [base library](#base-library)
 
 ## Tic Tac Toe client arguments
-- `(/-)d` - Allows duplicate bots
-- `(/-)h` - Disables hot reloading of bots
+- `(/-)d` - Allows duplicate plugins
+- `(/-)h` - Disables hot reloading of plugins
 - `(/-)c` - If set, clears the console on hot reload
 - `(/-)s [int]` - Sets the seed of `Compdog.TicTacToe.Game.Random`
 
@@ -52,17 +51,17 @@ All commands are in the `command arg0 arg1 arg2...` format
 - `exit` - Exits client
 - `args` - Displays the process arguments
 - `cls` - Clears the screen
-- `clear [cell?]` - Clears the board. Optionally clears a cell
+- `clear [cell?]` - Clears the board or cell
 - `print [player?]` - Prints the current global (or player if specified) board
 - `player [player?]` - Sets or gets the current player.
 - `move [cell]` - Sets `cell` to current player
-- `bot`
-  - `list` - Lists all currently loaded bots
-  - `info [query]` - Finds all bots using `query` and shows detailed info
+- `plugin`
+  - `list` - Lists all currently loaded plugins
+  - `info [query]` - Finds all plugins using `query` and shows detailed info
   - `event [event]` - Calls global event `event`
-  - `run [query] \[args]` - Finds all bots using `query` and runs with args `\arg`
-  - `load` - Reloads bots
-  - `unload` - Unloads currently loaded bots
+  - `run [query] \[args]` - Finds all plugins using `query` and runs with args `\arg`
+  - `load` - Reloads plugins
+  - `unload` - Unloads currently loaded plugins
  
  ### Argument formats
  `player` - A number representing the player index.  
@@ -93,11 +92,11 @@ move c2
 Playing with a bot:
 ```
 move a1
-bot run mybot \move \1
+plugin run mybot \move \1
 move a3
-bot run mybot \move \1
+plugin run mybot \move \1
 move b1
-bot run mybot \move \1
+plugin run mybot \move \1
 ```
 
 Playing with a bot with events:
@@ -109,9 +108,18 @@ move b1
 
 ## Base library
 - `Compdog.TicTacToe.Cell` - Enum for cell values
+- `Compdog.TicTacToe.Arg`
+  - `static EmptyArray` - Returns an empty `Arg` array
+  - `static Empty` - Returns an empty `Arg` instance
+  - `Name` - The argument's name
+  - `IsNull` - Returns `true` if the raw value is `null`
+  - `Raw` - Returns the raw value
+  - `implicit operator T(Arg)` - Returns the raw value casted as `T` (valid options are the same as in constructors)
 - `Compdog.TicTacToe.SubscribedEventArgs`
   - `Event` - Event name
-  - `Game` - Current `Game` instance
+  - `Args` - Event args
+  - `bool HasArg(string name)` - Returns `true` if arg `name` exists
+  - `bool GetArg(string name)` - Returns the arg with name `name`
 - `Compdog.TicTacToe.BoardUpdateEventArgs`
   - `Board` - Changed board index
   - `Cell` - Changed cell index. `-1` if multiple changed (like when calling `Clear(board)`)
@@ -130,17 +138,23 @@ move b1
   - `void Move(int board, Cell(int) cell)` - Sets `cell` to `board`. If already taken throws an `InvalidOperationException`
   - `bool TryMove(int board, Cell(int) cell, out string errorMessage)` - Sets `cell` to `board`. If error, returns `false` and sets `errorMessage` to the error
   - `int GetWin(int board)` - Returns win move or `-1` if none
-- `Compdog.TicTacToe.Loader` - Bot controller
-  - `bool Subscribe(IBot sender, string evt)` - Subscribes `sender` to event `evt`. Returns `false` if already subscribed
-  - `bool UnSubscribe(IBot sender, string evt)` - Unsubscribes `sender` from event `evt`. Returns `false` if not subscribed
-  - `bool Call(string evt, Game game)` - Calls event `evt`. Returns `false` if event doesn't exist or if bot terminated it
-- `Compdog.TicTacToe.Bots.IBot` - Interface for all bots
-  - `Description` - Long description of the bot. Shown on `bot info`. If null or empty `ShortDescription` is shown
-  - `ShortDescription` - Short description of the bot. Shown on `bot list`
-  - `bool Load(Loader loader, Arguments args)` - Called on bot load. Return `false` if it shouldn't load it
-  - `bool Unload(Loader loader)` - Called on bot unload
-  - `bool Event(Loader loader, SubscribedEventArgs e)` - Called on global event
-  - `bool Run(Game game, Loader loader, string[] args)` - Main code of the bot. `args` contains all args that start with `\` passed in with `bot run`
+- `Compdog.TicTacToe.PCUE`
+  - `Game` - The game
+  - `EventManager` - The event manager
+  - `Arguments` - The command line arguments
+  - `bool LoadPlugins(bool allowDuplicates)` - Loads plugins
+  - `bool UnloadPlugins()` - Unloads plugins
+- `Compdog.TicTacToe.EventManager`
+  - `bool Subscribe(IPlugin sender, string evt)` - Subscribes `sender` to event `evt`. Returns `false` if already subscribed
+  - `bool UnSubscribe(IPlugin sender, string evt)` - Unsubscribes `sender` from event `evt`. Returns `false` if not subscribed
+  - `bool Call(string evt, params Arg[] args)` - Calls event `evt` with args `args`. Returns `false` if event doesn't exist or if plugin terminated it
+- `Compdog.TicTacToe.Plugins.IPlugin` - Interface for all plugins
+  - `Description` - Long description of the plugin. Shown on `plugin info`. If null or empty `ShortDescription` is shown
+  - `ShortDescription` - Short description of the plugin. Shown on `plugin list`
+  - `bool Load(PCUE pcue)` - Called on plugin load. Return `false` if it shouldn't load it
+  - `bool Unload()` - Called on plugin unload
+  - `bool Event(SubscribedEventArgs e)` - Called on global event
+  - `bool Run(string[] args)` - Main function. `args` contains all args that start with `\` passed in with `plugin run`
 - `Compdog.TicTacToe.Utils.Arguments` - Command line arguments
   - `string GetFlag(string name)` - Returns the flag or `string.Empty` if none
   - `bool HasFlag(string name)` - Returns `true` if flag exists
