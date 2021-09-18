@@ -1,5 +1,5 @@
 # Tic Tac Toe
-Examples and docs for tictatoe
+A simple client with plugins
 
 ## Getting started (in Visual Studio 2019)
 
