@@ -44,6 +44,7 @@ This is an example.
 - `(/-)h` - Disables hot reloading of plugins
 - `(/-)c` - If set, clears the console on hot reload
 - `(/-)s [int]` - Sets the seed of `Compdog.TicTacToe.Game.Random`
+- `(/-)v` - Enables verbose mode
 
 ## Tic Tac Toe client commands
 All commands are in the `command arg0 arg1 arg2...` format
