@@ -10,6 +10,7 @@
 
 - `TicTacToe.Bots.IBot` is now `TicTacToe.Plugins.IPlugin`
 - Removed repeating function arguments from `IPlugin` and replaced with `PCUE` in `Load`
+- `bot *` client commands are now `plugin *`
 
 ## [1.1.0.0] - 2021-09-16
 
